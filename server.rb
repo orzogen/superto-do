@@ -1,5 +1,8 @@
 require 'sinatra'
 require 'thin'
+configure :production do
+  require 'newrelic_rpm'
+end
 
 set :server, :thin
 
