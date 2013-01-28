@@ -10,6 +10,7 @@ var Item = Backbone.Model.extend({
 var Items = Backbone.Collection.extend({
     model: Item,
 });
+
         	
 items = new Items();
 
@@ -18,7 +19,6 @@ populateCollectionFromLocalStorage(items);
      	 
      	 
 //--------------------------------------------------------------------------------------
-     	 
      	 
      	 
 // THIS IS TRIGGERED WHEN ADDING AN ITEM    	
@@ -31,24 +31,23 @@ $("#add").keydown(function(key){
     	if (entry!=""){
         	items.add({entry: entry, id: uuid()}); // Generate item and add to list.
         	draw(items); // Draw items.
-        	updateItemDeleteClickHandlers();
+        	reMapItemDeleteClickHandlers();
         	saveItemsInCollectionToLocalStorage(items);
         }
     }
 });
-
 
 // THIS IS CALLED TO REDRAW THE VIEW
 function draw(collection){ 
 	$("#list").html(""); // Reset the displayed items.
 	
     collection.each(function(item){ // Add a row for each item.
-        $("#list").prepend('<div class="row" ' + 'data-id="' + item.get("id") + '">' + item.get("entry") + '</row>');
+      	$("#list").prepend('<div class="row" ' + 'data-id="' + item.get("id") + '">' + item.get("entry") + '</row>');
     }); 
     
-    $("#add").val(""); // Clear the input field.
+	$("#add").val(""); // Clear the input field.
     reMapItemDeleteClickHandlers(); // Update click handlers for deleting items.
-    insertPlaceholderIfEmptyList(items);
+	insertPlaceholderIfEmptyList(items);
 }
 
 

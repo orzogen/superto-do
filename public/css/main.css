@@ -104,7 +104,7 @@ textarea {
 
 
 #main{
-	width: 30%;
+	width: 60%;
 	max-width: 400px;
 	margin: 10% auto;
 	display: block;
@@ -116,6 +116,8 @@ textarea {
 	margin: 0 auto;
 	text-align: left;
 	font: 1.2em 'Orienta', Helvetica, sans-serif;
+	max-height: 400px;
+	overflow-y: scroll;
 }
 
 .row{padding: 10px 5px;}
