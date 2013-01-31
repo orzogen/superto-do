@@ -120,14 +120,27 @@ textarea {
 	overflow-y: scroll;
 }
 
-.row{padding: 10px 5px;}
+#important .row{
+    background: #A9F5A9;
+}
+
+#important .row:nth-child(2n){
+	background: #D8F6CE;
+}
+
+.row{
+    padding: 10px 5px;
+    line-height: 1.2em;
+}
 .row:nth-child(2n){
 	background: #D8D8D8;
 }
 .row:not(.placeholder):hover{
-	background: #F5A9BC;
+	background: #F5A9BC !important;
 	cursor: pointer;
 }
+
+#important .row:last-child{border-bottom: 1px solid black}
 
 #add{
 	font: 1.2em 'Orienta', Helvetica, sans-serif;
@@ -147,6 +160,10 @@ textarea {
 #add::-webkit-input-placeholder{
 	color: white;
 	font-size: 1em;
+}
+
+.placeholder{
+    font-size: 1em;
 }
 
 
