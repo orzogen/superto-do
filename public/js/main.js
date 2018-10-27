@@ -3,11 +3,11 @@ function uuid() {
    	return (((1+Math.random())*0x10000)|0).toString(8).substring(1);
 }
 			
-var Item = Backbone.Model.extend({
+const Item = Backbone.Model.extend({
 	defaults: {entry: "", id: 0, important: false}
 });
         	
-var Items = Backbone.Collection.extend({
+const Items = Backbone.Collection.extend({
     model: Item,
 });
 
@@ -23,13 +23,13 @@ populateCollectionFromLocalStorage(items);
      	 
 // THIS IS TRIGGERED WHEN ADDING AN ITEM    	
 $("#add").keydown(function(key){
-    var code = key.which; // Get code of pressed key.
+    const code = key.which; // Get code of pressed key.
     
     if(code==13){ // If the code indicates a press of enter key, save the item.
         key.preventDefault();
-    	var entry = $('#add').val(); // Get text of the item from the input field.
+    	const entry = $('#add').val(); // Get text of the item from the input field.
     	if (entry!=""){
-    	    var important = (entry.match(/.+\*/)) ? true : false;
+    	    const important = (entry.match(/.+\*/)) ? true : false;
     	    if(important){entry = entry.slice(0, -1);}
         	items.add({entry: entry, id: uuid(), important: important}); // Generate item and add to list.
         	saveItemsInCollectionToLocalStorage(items);
@@ -63,7 +63,7 @@ function draw(collection){
 // REMAPS CLICK BINDING FOR DELETING ITEMS
 function reMapItemDeleteClickHandlers(){ 
 	$(".row").click(function(){
-		var item = items.get($(this).data("id"));
+		const item = items.get($(this).data("id"));
 		items.remove(item);
 		saveItemsInCollectionToLocalStorage(items);
 		$("#add").focus();
@@ -80,13 +80,13 @@ function insertPlaceholderIfEmptyList(collection){ // Called after drawing view
 function saveItemsInCollectionToLocalStorage(collection){
 	localStorage.clear(); // Clear localStorage before rewriting to it.
 	collection.each(function(item){
-	    var itemData = JSON.stringify({entry: item.get("entry"), important: item.get("important")});
+	    const itemData = JSON.stringify({entry: item.get("entry"), important: item.get("important")});
 		localStorage.setItem(item.get("id"), itemData);
 	});
 }
 
 function populateCollectionFromLocalStorage(collection){
-	for (var i = 0; i < localStorage.length; i++){
+	for (let i = 0; i < localStorage.length; i++){
     	var item = JSON.parse(localStorage.getItem(localStorage.key(i)));
     	items.add({entry: item.entry, id: localStorage.key(i), important: item.important});
 	}
